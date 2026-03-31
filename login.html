@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login – Ed-Hills</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Outfit',sans-serif;min-height:100vh;background:#0f1b35;display:flex;flex-direction:column;}
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 16px;position:relative;overflow:hidden;}
+    .page-wrap::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(48,109,214,.18) 0%,transparent 70%);}
+    .page-wrap::after{content:'';position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(48,109,214,.15) 0%,transparent 70%);}
+
+    /* ── CARD ── */
+    .card{display:flex;width:100%;max-width:960px;min-height:580px;border-radius:24px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);position:relative;z-index:1;}
+
+    /* ── LEFT PANEL ── */
+    .left-panel{flex:1;background:linear-gradient(145deg,#1a2f6e 0%,#306DD6 50%,#306DD6 100%);padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+    .left-panel::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:rgba(250,204,21,.07);border-radius:50%;}
+    .left-panel::after{content:'';position:absolute;bottom:-60px;left:-60px;width:250px;height:250px;background:rgba(255,255,255,.04);border-radius:50%;}
+    .left-logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative;z-index:1;}
+    .left-logo img{height:42px;border-radius:8px;border:2px solid rgba(255,255,255,.2);}
+    .left-logo span{font-size:22px;font-weight:800;color:#fff;}
+    .left-content{position:relative;z-index:1;}
+    .left-content h2{font-size:34px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:14px;}
+    .left-content h2 span{color:#facc15;}
+    .left-content p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:32px;}
+    .left-features{display:flex;flex-direction:column;gap:14px;}
+    .left-feat{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.85);font-size:14px;font-weight:500;}
+    .left-feat-icon{width:36px;height:36px;background:rgba(250,204,21,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#facc15;flex-shrink:0;}
+    .left-bottom{position:relative;z-index:1;}
+    .left-bottom p{font-size:13px;color:rgba(255,255,255,.5);}
+    .left-bottom a{color:#facc15;font-weight:600;text-decoration:none;}
+    @media(max-width:700px){.left-panel{display:none;}}
+
+    /* ── RIGHT PANEL ── */
+    .right-panel{flex:1;background:#fff;padding:48px 44px;display:flex;flex-direction:column;justify-content:center;position:relative;}
+    .back-link{position:absolute;top:20px;left:24px;display:flex;align-items:center;gap:6px;color:#64748b;font-size:13px;font-weight:500;text-decoration:none;transition:.2s;}
+    .back-link:hover{color:#1A4FA0;}
+    .right-header{margin-bottom:28px;}
+    .right-header h3{font-size:26px;font-weight:800;color:#1A4FA0;margin-bottom:6px;}
+    .right-header p{font-size:14px;color:#64748b;}
+
+    /* ── TABS ── */
+    .tabs{display:flex;background:#f1f5f9;border-radius:10px;padding:4px;margin-bottom:24px;gap:4px;}
+    .tab{flex:1;padding:9px;border-radius:8px;text-align:center;font-size:14px;font-weight:600;color:#64748b;cursor:pointer;transition:.2s;border:none;background:transparent;font-family:'Outfit',sans-serif;}
+    .tab.active{background:#fff;color:#1A4FA0;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+
+    /* ── INPUTS ── */
+    .field{margin-bottom:16px;position:relative;}
+    .field label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;}
+    .field-inner{position:relative;}
+    .field-inner i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:17px;pointer-events:none;transition:.2s;}
+    .field input{width:100%;padding:12px 14px 12px 42px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;font-family:'Outfit',sans-serif;color:#1B2124;outline:none;transition:.2s;background:#fafafa;}
+    .field input:focus{border-color:#306DD6;background:#fff;box-shadow:0 0 0 3px rgba(48,109,214,.1);}
+    .field input:focus ~ i,.field input:focus + i{color:#306DD6;}
+    .field input::placeholder{color:#c4c9d4;}
+    .eye-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#9ca3af;cursor:pointer;font-size:17px;transition:.2s;}
+    .eye-toggle:hover{color:#306DD6;}
+
+    /* ── OTP ROW ── */
+    .otp-row{display:flex;gap:10px;}
+    .otp-row .field-inner{flex:1;}
+    .send-otp-btn{padding:0 16px;border:1.5px solid #306DD6;border-radius:10px;background:#fff;color:#306DD6;font-weight:700;font-size:13px;font-family:'Outfit',sans-serif;cursor:pointer;white-space:nowrap;transition:.2s;height:46px;}
+    .send-otp-btn:hover{background:#306DD6;color:#fff;}
+    .send-otp-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+    /* ── OTP TYPE TOGGLE ── */
+    .otp-type{display:flex;gap:16px;margin-bottom:14px;}
+    .otp-type label{display:flex;align-items:center;gap:6px;font-size:13px;color:#64748b;cursor:pointer;font-weight:500;}
+    .otp-type input[type=radio]{accent-color:#306DD6;}
+
+    /* ── SUBMIT BTN ── */
+    .submit-btn{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,#306DD6,#306DD6);color:#fff;font-size:16px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
+    .submit-btn:hover{background:linear-gradient(135deg,#306DD6,#1A4FA0);transform:translateY(-2px);box-shadow:0 8px 20px rgba(48,109,214,.3);}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+    /* ── DIVIDER ── */
+    .divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:#9ca3af;font-size:13px;}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:#e5e7eb;}
+
+    /* ── GOOGLE BTN ── */
+    .google-btn{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:10px;background:#fff;color:#374151;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:.2s;}
+    .google-btn:hover{border-color:#306DD6;background:#f8faff;box-shadow:0 2px 8px rgba(48,109,214,.1);}
+    .google-btn img{width:20px;height:20px;}
+
+    /* ── EXTRA LINKS ── */
+    .extra-links{display:flex;justify-content:space-between;margin-top:18px;font-size:13px;}
+    .extra-links a{color:#64748b;text-decoration:none;font-weight:500;transition:.2s;}
+    .extra-links a:hover{color:#306DD6;text-decoration:underline;}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:#1e293b;color:#fff;padding:12px 24px;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:.4s cubic-bezier(.68,-.55,.265,1.55);z-index:99999;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;white-space:nowrap;}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:all;}
+    .toast.success{background:#059669;}
+    .toast.error{background:#dc2626;}
+
+    /* ── FOOTER BAR ── */
+    .page-footer{background:#0a1428;padding:16px;text-align:center;font-size:13px;color:rgba(255,255,255,.4);}
+    .page-footer a{color:rgba(250,204,21,.7);font-weight:600;text-decoration:none;}
+  </style>
+</head>
+<body>
+
+  <!-- PAGE WRAP -->
+  <div class="page-wrap">
+    <div class="card">
+
+      <!-- LEFT PANEL -->
+      <div class="left-panel">
+        <a href="index.html" class="left-logo">
+          <img src="logo.jpeg" alt="Ed-Hills"/>
+          <span>EdHills</span>
+        </a>
+        <div class="left-content">
+          <h2>India's Most <span>Affordable</span> Learning Platform</h2>
+          <p>Join 15 Million+ students preparing for JEE, NEET, CUET, SSC & Board Exams with expert faculty and smart tools.</p>
+          <div class="left-features">
+            <div class="left-feat"><div class="left-feat-icon"><i class="ri-live-line"></i></div> Daily Live Interactive Classes</div>
+            <div class="left-feat"><div class="left-feat-icon"><i class="ri-robot-2-line"></i></div> AI-Powered Doubt Solver 24/7</div>
+            <div class="left-feat"><div class="left-feat-icon"><i class="ri-bar-chart-2-line"></i></div> Personalised Performance Analytics</div>
+            <div class="left-feat"><div class="left-feat-icon"><i class="ri-draft-line"></i></div> 24,000+ Mock Tests & PYQs</div>
+          </div>
+        </div>
+        <div class="left-bottom">
+          <p>Don't have an account? <a href="register.html">Sign up free →</a></p>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+        <a href="index.html" class="back-link"><i class="ri-arrow-left-line"></i> Back to Home</a>
+
+        <div class="right-header">
+          <h3>Welcome Back 👋</h3>
+          <p>Sign in to continue your learning journey</p>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+          <button class="tab active" id="tabPassword" onclick="switchLogin('password')">Password Login</button>
+          <button class="tab" id="tabOtp" onclick="switchLogin('otp')">OTP Login</button>
+        </div>
+
+        <!-- PASSWORD FORM -->
+        <form id="passwordLoginForm">
+          <div class="field">
+            <label>Email Address</label>
+            <div class="field-inner">
+              <input type="email" id="email" placeholder="you@example.com" required/>
+              <i class="ri-mail-line"></i>
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="field-inner">
+              <input type="password" id="password" placeholder="Enter your password" required/>
+              <i class="ri-lock-2-line"></i>
+              <span class="eye-toggle" onclick="toggleEye('password',this)"><i class="ri-eye-off-line"></i></span>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Sign In <i class="ri-arrow-right-line"></i></button>
+        </form>
+
+        <!-- OTP FORM -->
+        <form id="otpLoginForm" style="display:none;">
+          <div class="otp-type">
+            <label><input type="radio" name="otpType" value="email" checked onclick="toggleOTPType('email')"/> Email OTP</label>
+            <label><input type="radio" name="otpType" value="phone" onclick="toggleOTPType('phone')"/> Phone OTP</label>
+          </div>
+
+          <div id="emailOtpGroup">
+            <div class="field">
+              <label>Email Address</label>
+              <div class="otp-row">
+                <div class="field-inner">
+                  <input type="email" id="otpEmail" placeholder="you@example.com"/>
+                  <i class="ri-mail-line"></i>
+                </div>
+                <button type="button" class="send-otp-btn" id="sendOtpBtn">Send OTP</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="phoneOtpGroup" style="display:none;">
+            <div class="field">
+              <label>Phone Number</label>
+              <div class="otp-row">
+                <div class="field-inner">
+                  <input type="tel" id="otpPhone" placeholder="+91 9876543210"/>
+                  <i class="ri-phone-line"></i>
+                </div>
+                <button type="button" class="send-otp-btn" id="sendPhoneOtpBtn">Send OTP</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="recaptcha-container"></div>
+
+          <div class="field" style="margin-top:4px;">
+            <label>6-Digit OTP</label>
+            <div class="field-inner">
+              <input type="text" id="otpCode" placeholder="• • • • • •" maxlength="6"/>
+              <i class="ri-shield-keyhole-line"></i>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Verify & Sign In <i class="ri-shield-check-line"></i></button>
+        </form>
+
+        <!-- DIVIDER -->
+        <div class="divider">or continue with</div>
+
+        <!-- GOOGLE -->
+        <button type="button" class="google-btn" onclick="loginWithGoogle()">
+          <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google"/>
+          Sign in with Google
+        </button>
+
+        <div class="extra-links">
+          <a href="forgot-password.html">Forgot Password?</a>
+          <a href="register.html">Create Account</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    &copy; 2026 Ed-Hills &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="courses.html">Courses</a>
+  </div>
+
+  <!-- TOAST -->
+  <div id="loginToast" class="toast"></div>
+
+  <!-- HELPERS -->
+  <script>
+    function toggleEye(id, el) {
+      const inp = document.getElementById(id);
+      const icon = el.querySelector('i');
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        icon.className = 'ri-eye-line';
+      } else {
+        inp.type = 'password';
+        icon.className = 'ri-eye-off-line';
+      }
+    }
+    function switchLogin(mode) {
+      const pForm = document.getElementById('passwordLoginForm');
+      const oForm = document.getElementById('otpLoginForm');
+      const tP = document.getElementById('tabPassword');
+      const tO = document.getElementById('tabOtp');
+      if (mode === 'password') {
+        pForm.style.display = 'block'; oForm.style.display = 'none';
+        tP.classList.add('active'); tO.classList.remove('active');
+      } else {
+        pForm.style.display = 'none'; oForm.style.display = 'block';
+        tO.classList.add('active'); tP.classList.remove('active');
+      }
+    }
+    function toggleOTPType(type) {
+      document.getElementById('emailOtpGroup').style.display = type === 'email' ? 'block' : 'none';
+      document.getElementById('phoneOtpGroup').style.display = type === 'phone' ? 'block' : 'none';
+    }
+    window.showToast = function(msg, type = 'error') {
+      const t = document.getElementById('loginToast');
+      t.className = 'toast show ' + type;
+      t.innerHTML = (type === 'success' ? '✅ ' : '⚠️ ') + msg;
+      setTimeout(() => t.className = 'toast', 4000);
+    }
+  </script>
+
+  <!-- FIREBASE AUTH -->
+  <script type="module">
+    import { auth } from './firebase-config.js';
+    import { GoogleAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    window.loginWithGoogle = async function() {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const response = await fetch('http://localhost:5000/api/auth/google-login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: user.displayName, email: user.email, photo: user.photoURL, providerId: user.uid })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          localStorage.setItem('currentUser', JSON.stringify(data.user));
+          localStorage.setItem('edHillsToken', data.token);
+          showToast('Welcome ' + data.user.name, 'success');
+          setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+        } else { throw new Error(data.message); }
+      } catch (error) {
+        if (error.message.includes('Failed to fetch') || error.message.includes('Backend')) {
+          const u = auth.currentUser;
+          if (u) {
+            localStorage.setItem('currentUser', JSON.stringify({ name: u.displayName, email: u.email, photo: u.photoURL, role: 'student' }));
+            localStorage.setItem('edHillsToken', 'local-google-session');
+            showToast('Logged in via Google (Offline Mode)', 'success');
+            setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+          }
+        } else { showToast('Google Sign-In failed: ' + error.message, 'error'); }
+      }
+    };
+
+    let confirmationResult;
+    window.sendPhoneOTP = async function() {
+      const phoneNumber = document.getElementById('otpPhone').value;
+      if (!phoneNumber) return showToast('Enter phone number with country code', 'error');
+      const btn = document.getElementById('sendPhoneOtpBtn');
+      btn.disabled = true; btn.innerHTML = '...';
+      try {
+        if (!window.recaptchaVerifier) {
+          window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { size: 'invisible' });
+        }
+        confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+        showToast('OTP sent to ' + phoneNumber, 'success');
+        btn.innerHTML = 'Sent ✓';
+      } catch (e) {
+        showToast('Failed to send SMS: ' + e.message, 'error');
+        btn.disabled = false; btn.innerHTML = 'Send OTP';
+      }
+    };
+
+    window.sendOTP = async function() {
+      const email = document.getElementById('otpEmail').value;
+      if (!email) return showToast('Enter your email first', 'error');
+      const btn = document.getElementById('sendOtpBtn');
+      btn.innerHTML = '...'; btn.disabled = true;
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/send-otp', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        showToast(data.message, res.ok ? 'success' : 'error');
+        if (!res.ok) { btn.innerHTML = 'Send OTP'; btn.disabled = false; }
+        else btn.innerHTML = 'Sent ✓';
+      } catch (e) {
+        showToast('Demo Mode: OTP 123456 sent to ' + email, 'success');
+        btn.innerHTML = 'Sent ✓';
+      }
+    };
+
+    document.getElementById('sendOtpBtn').addEventListener('click', window.sendOTP);
+    document.getElementById('sendPhoneOtpBtn').addEventListener('click', window.sendPhoneOTP);
+
+    document.getElementById('passwordLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      handleLogin('http://localhost:5000/api/auth/login', {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      });
+    });
+
+    document.getElementById('otpLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const mode = document.querySelector('input[name="otpType"]:checked').value;
+      const otp = document.getElementById('otpCode').value;
+      if (mode === 'phone') {
+        if (!confirmationResult) return showToast('Please send OTP first', 'error');
+        try {
+          const result = await confirmationResult.confirm(otp);
+          localStorage.setItem('currentUser', JSON.stringify({ name: 'Phone User', phone: result.user.phoneNumber, role: 'student' }));
+          showToast('Login Successful!', 'success');
+          setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+        } catch (err) { showToast('Invalid OTP: ' + err.message, 'error'); }
+      } else {
+        handleLogin('http://localhost:5000/api/auth/verify-otp', { email: document.getElementById('otpEmail').value, otp });
+      }
+    });
+
+    async function handleLogin(url, body) {
+      document.querySelectorAll('.submit-btn').forEach(b => b.disabled = true);
+      try {
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const data = await res.json();
+        if (res.ok) {
+          localStorage.setItem('currentUser', JSON.stringify(data.user));
+          localStorage.setItem('edHillsToken', data.token);
+          showToast('Login Successful!', 'success');
+          setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+          return;
+        }
+        showToast('Login Failed: ' + data.message, 'error');
+      } catch (err) {
+        if (body.email === 'edhills@gmail.com' && (body.password === 'edhills' || body.otp === '123456')) {
+          localStorage.setItem('currentUser', JSON.stringify({ name: 'Demo Student', email: 'edhills@gmail.com', role: 'student' }));
+          showToast('Logged in via Demo Account!', 'success');
+          setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+          return;
+        }
+        const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = localUsers.find(u => u.email === body.email);
+        if (user && (user.password === body.password || body.otp === '123456')) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('edHillsToken', 'local-offline-session');
+          showToast('Welcome back ' + user.name + ' (Offline)', 'success');
+          setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1000);
+        } else {
+          showToast('Invalid credentials or server offline.', 'error');
+        }
+      } finally {
+        document.querySelectorAll('.submit-btn').forEach(b => b.disabled = false);
+      }
+    }
+  </script>
+
+</body>
+</html>

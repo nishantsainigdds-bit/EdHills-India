@@ -1,0 +1,153 @@
+﻿<!-- ED-HILLS SHARED NAVBAR -->
+
+<header id="main-header">
+
+  <!-- LOGO -->
+  <a href="index.html" class="logo">
+    <i class="ri-graduation-cap-fill"></i>
+    Ed<span>Hills</span>
+  </a>
+
+  <!-- HAMBURGER (mobile) -->
+  <div class="menu-toggle" id="mobile-menu" onclick="ehToggleNav()">
+    <i class="ri-menu-3-line"></i>
+  </div>
+
+  <!-- DESKTOP NAV -->
+  <nav id="nav-menu">
+
+    <a href="index.html">
+      <i class="ri-home-4-line"></i> Home
+    </a>
+
+    <!-- Courses with mega dropdown -->
+    <div class="eh-courses-wrap" style="display:inline-flex;align-items:center;">
+      <button class="eh-courses-btn" id="ehCoursesBtn" onclick="ehToggleCourses(event)">
+        <i class="ri-book-open-line"></i>
+        <span>Courses</span>
+        <i class="ri-arrow-down-s-line eh-chevron"></i>
+      </button>
+
+      <!-- MEGA DROPDOWN -->
+  
+
+    <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+
+    <a href="my-school.html" id="myBatchesNavLink">
+      <i class="ri-stack-line"></i> My School
+    </a>
+     <a href="courses.html"  id="myBatchesNavLink">
+      <i class="ri-smartphone-line"></i> Courses 
+    </a>
+    <a href="get-app.html" class="eh-getapp">
+      <i class="ri-smartphone-line"></i> Get App
+    </a>
+     <a href="about.html"  id="myBatchesNavLink">
+      <i class="ri-smartphone-line"></i> About Us
+    </a>
+
+          <!-- Right: Course cards -->
+          <div class="eh-course-cards">
+            <div class="eh-cards-panel eh-panel-active" id="panel-competitive">
+              <a href="jee-course-details.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/1f23db31-6da9-4ed1-93fe-baea21bad40b.webp)"></div><span>IIT JEE</span></a>
+              <a href="neet-course-details.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/ba8452a1-91d3-45e8-862a-e23ec4c25b3f.webp)"></div><span>NEET</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/3d53d72c-a091-496f-b771-e8c5336ca9e3.webp)"></div><span>GATE</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/d2ff26d3-01f6-417a-aa62-71755517cd6d.webp)"></div><span>AE/JE</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/5fce0156-448c-409a-ab0d-7ffe3687061d.webp)"></div><span>Olympiad</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/ede9393f-c1b4-4d21-beee-597be35b9f15.webp)"></div><span>ESE</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-upsc">
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/002e5e6e-47f1-4b21-89e0-8218ffcce066.webp)"></div><span>UPSC CSE</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/6cee4301-2d82-412a-8399-fcd6524f295c.webp)"></div><span>State PSC</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-school">
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/5b8acaeb-99a5-430b-b91e-530901d3e62d.webp)"></div><span>Foundation 6–10</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/f92297a4-fc55-4a87-84db-fbc401de6feb.webp)"></div><span>Class 1–8</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-boards">
+              <a href="board-syllabus.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/ea0c9588-2853-4018-838d-73bb36d1e677.webp)"></div><span>CBSE</span></a>
+              <a href="board-syllabus.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/ea0c9588-2853-4018-838d-73bb36d1e677.webp)"></div><span>ICSE</span></a>
+              <a href="board-syllabus.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/b2e8df47-344e-4b22-89a2-28fee10fe2d9.png)"></div><span>UP Board</span></a>
+              <a href="board-syllabus.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/15dfa728-fa3e-4f28-905e-c0a46c2acf1f.png)"></div><span>Bihar Board</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-govt">
+              <a href="enroll-ssc.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/4f51f216-da5e-44ab-9eeb-be0cac962717.webp)"></div><span>SSC</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/c0f7d763-fbf2-4899-adc9-1eb94e226496.webp)"></div><span>Banking</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/b62cf3d6-e96a-4d82-84a9-28cfb52eff50.webp)"></div><span>Railway</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/92720c9d-6266-4586-8de8-ecc93697f06e.webp)"></div><span>Defence</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-ugpg">
+              <a href="cuet-course-details.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/b4160846-5d0d-4f28-bad4-0ec6e0a7dab1.webp)"></div><span>CUET</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/8cad76d5-6a73-418a-9d0b-56b0a5664658.webp)"></div><span>UGC NET</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/6561a530-f1da-4d32-b301-43d03db5b029.webp)"></div><span>MBA</span></a>
+            </div>
+            <div class="eh-cards-panel" id="panel-finance">
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/9d6eaa2f-0572-4a3b-a13a-7ce1d17ff757.webp)"></div><span>CA</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5b09189f7285894d9130ccd0/2f8ad339-27cc-465b-b298-70cbc38ad973.webp)"></div><span>CS</span></a>
+              <a href="courses.html" class="eh-course-card"><div class="eh-course-icon" style="background-image:url(https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/2aadbb18-b35e-425c-b9a1-6e3060b0c18b.webp)"></div><span>ACCA</span></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <a href="student-dashboard.html" id="myBatchesNavLink">
+      <i class="ri-stack-line"></i> My Batches
+    </a>
+
+    <a href="weightage-analysis.html">
+      <i class="ri-bar-chart-line"></i> Rank Predictor
+    </a>
+
+    <a href="get-app.html" class="eh-getapp">
+      <i class="ri-smartphone-line"></i> Get App
+    </a>
+
+    <a href="exam-papers.html">
+      <i class="ri-file-text-line"></i> Study Material
+    </a>
+
+    <a href="student-dashboard.html" class="nav-btn" id="loginBtn">
+      <i class="ri-dashboard-line"></i> Dashboard
+    </a>
+
+  </nav>
+
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="eh-mobile-drawer" id="ehMobileDrawer">
+  <div class="eh-drawer-header">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;color:#fff;text-decoration:none;">
+      <i class="ri-graduation-cap-fill" style="color:#00C2A8;font-size:24px;"></i> Ed-Hills
+    </a>
+    <div onclick="ehToggleNav()" style="cursor:pointer;font-size:22px;color:rgba(255,255,255,.6);">
+      <i class="ri-close-line"></i>
+    </div>
+  </div>
+  <div class="eh-drawer-body">
+    <div class="eh-drawer-section">
+      <div class="eh-drawer-label">Navigation</div>
+      <a href="index.html" class="eh-drawer-link"><i class="ri-home-4-line"></i> Home</a>
+      <a href="courses.html" class="eh-drawer-link"><i class="ri-book-open-line"></i> All Courses</a>
+      <a href="student-dashboard.html" class="eh-drawer-link"><i class="ri-stack-line"></i> My Batches</a>
+      <a href="weightage-analysis.html" class="eh-drawer-link"><i class="ri-bar-chart-line"></i> Rank Predictor</a>
+      <a href="exam-papers.html" class="eh-drawer-link"><i class="ri-file-text-line"></i> Study Material</a>
+    </div>
+    <div class="eh-drawer-section">
+      <div class="eh-drawer-label">More</div>
+      <a href="about.html" class="eh-drawer-link"><i class="ri-team-line"></i> About Us</a>
+      <a href="updates.html" class="eh-drawer-link"><i class="ri-notification-3-line"></i> Updates</a>
+      <a href="get-app.html" class="eh-drawer-link" style="background:rgba(0,194,168,.1);border-radius:8px;">
+        <i class="ri-smartphone-line"></i>
+        <span style="color:#00C2A8;font-weight:700;">Get Ed-Hills App</span>
+        <span style="margin-left:auto;font-size:11px;background:#00C2A8;color:#0F172A;padding:2px 8px;border-radius:50px;font-weight:800;">Free</span>
+      </a>
+    </div>
+    <a href="student-dashboard.html" class="eh-drawer-login">
+      <i class="ri-dashboard-line"></i> Dashboard
+    </a>
+  </div>
+</div>
+<div class="eh-drawer-overlay" id="ehDrawerOverlay" onclick="ehToggleNav()"></div>

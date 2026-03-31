@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My School – Edhills Digital School Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --blue:    #306DD6;
+      --blue-d:  #1A4FA0;
+      --blue-l:  #E8F0FD;
+      --blue-m:  #4d8fe0;
+      --dark:    #0F172A;
+      --dark2:   #1E293B;
+      --text:    #1B2124;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+      --bg:      #f8faff;
+      --white:   #ffffff;
+      --shadow:  0 4px 24px rgba(48,109,214,.12);
+      --shadow-h:0 12px 40px rgba(48,109,214,.22);
+      --r:       12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);line-height:1.6;overflow-x:hidden;}
+    h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;line-height:1.2;}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:99px;}
+
+    /* ── NAVBAR ── */
+    .ms-nav{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:9000;padding:0 5%;}
+    .ms-nav-inner{max-width:1200px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .ms-logo{display:flex;align-items:center;gap:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:var(--dark);}
+    .ms-logo i{color:var(--blue);font-size:22px;}
+    .ms-logo span{color:var(--blue);}
+    .ms-nav-links{display:flex;align-items:center;gap:4px;}
+    .ms-nav-links a{font-size:14px;font-weight:500;color:var(--muted);padding:7px 12px;border-radius:6px;transition:.2s;}
+    .ms-nav-links a:hover{color:var(--blue);background:var(--blue-l);}
+    .ms-nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:700;transition:.2s;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+    .ms-nav-cta:hover{background:var(--blue-d);transform:translateY(-1px);}
+    .ms-hamburger{display:none;font-size:22px;color:var(--dark);cursor:pointer;background:none;border:none;}
+    .ms-mobile-nav{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--border);padding:16px 5%;gap:4px;}
+    .ms-mobile-nav a{font-size:15px;font-weight:500;color:var(--text);padding:10px 12px;border-radius:8px;}
+    .ms-mobile-nav a:hover{background:var(--blue-l);color:var(--blue);}
+    .ms-mobile-nav.open{display:flex;}
+    @media(max-width:768px){.ms-nav-links{display:none;}.ms-hamburger{display:block;}}
+
+    /* ── SECTION COMMON ── */
+    .sec{padding:90px 5%;}
+    .wrap{max-width:1200px;margin:0 auto;}
+    .chip{display:inline-flex;align-items:center;gap:6px;background:var(--blue-l);color:var(--blue);padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;}
+    .sec-title{font-size:38px;font-weight:800;color:var(--dark);margin-bottom:14px;}
+    .sec-title span{color:var(--blue);}
+    .sec-sub{font-size:17px;color:var(--muted);max-width:580px;line-height:1.75;}
+    .text-center{text-align:center;}
+    .text-center .sec-sub{margin:0 auto;}
+
+    /* ── HERO ── */
+    .hero{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0fd 40%,#dbeafe 100%);padding:100px 5% 80px;overflow:hidden;position:relative;}
+    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(48,109,214,.1),transparent 70%);}
+    .hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:60px;flex-wrap:wrap;position:relative;z-index:1;}
+    .hero-text{flex:1;min-width:300px;}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(48,109,214,.1);color:var(--blue);border:1px solid rgba(48,109,214,.2);padding:7px 16px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:22px;}
+    .hero h1{font-size:52px;font-weight:900;color:var(--dark);line-height:1.1;margin-bottom:20px;}
+    .hero h1 span{color:var(--blue);}
+    .hero-sub{font-size:18px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:520px;}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+    .btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:14px 28px;border-radius:10px;font-weight:700;font-size:15px;transition:.3s;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+    .btn-fill:hover{background:var(--blue-d);transform:translateY(-3px);box-shadow:0 10px 28px rgba(48,109,214,.35);}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);padding:13px 26px;border-radius:10px;font-weight:700;font-size:15px;border:2px solid var(--blue);transition:.3s;cursor:pointer;font-family:'Inter',sans-serif;}
+    .btn-outline:hover{background:var(--blue-l);transform:translateY(-3px);}
+    .hero-trust{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:13px;color:var(--muted);}
+    .hero-trust i{color:#22c55e;}
+    .hero-visual{flex:1;min-width:280px;display:flex;justify-content:center;}
+    .dashboard-mock{background:#fff;border-radius:20px;box-shadow:0 24px 80px rgba(48,109,214,.2);padding:20px;width:100%;max-width:480px;border:1px solid var(--border);}
+    .mock-topbar{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+    .mock-dot{width:10px;height:10px;border-radius:50%;}
+    .mock-title{font-size:13px;font-weight:700;color:var(--dark);margin-left:4px;}
+    .mock-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+    .mock-stat{background:var(--blue-l);border-radius:10px;padding:12px;text-align:center;}
+    .mock-stat .num{font-size:20px;font-weight:800;color:var(--blue);}
+    .mock-stat .lbl{font-size:10px;color:var(--muted);margin-top:2px;}
+    .mock-chart{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;}
+    .mock-chart-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+    .mock-bars{display:flex;align-items:flex-end;gap:6px;height:60px;}
+    .mock-bar{flex:1;border-radius:4px 4px 0 0;transition:.3s;}
+    .mock-rows{display:flex;flex-direction:column;gap:7px;}
+    .mock-row{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:8px;padding:8px 12px;}
+    .mock-row-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+    .mock-row-text{font-size:11px;color:var(--text);flex:1;}
+    .mock-row-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;background:var(--blue-l);color:var(--blue);}
+    @media(max-width:900px){.hero h1{font-size:36px;}.hero-visual{display:none;}}
+    @media(max-width:600px){.hero h1{font-size:28px;}.hero-sub{font-size:15px;}}
+
+    /* ── PROBLEM STRIP ── */
+    .problem-strip{background:var(--dark);padding:60px 5%;}
+    .problem-inner{max-width:1200px;margin:0 auto;}
+    .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px;}
+    .problem-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;display:flex;align-items:flex-start;gap:14px;}
+    .problem-icon{width:44px;height:44px;background:rgba(255,107,107,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ff6b6b;flex-shrink:0;}
+    .problem-card h4{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .problem-card p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;}
+    .problem-cta{text-align:center;font-size:18px;font-weight:700;color:#fff;}
+    .problem-cta span{color:var(--blue-m);}
+    @media(max-width:768px){.problem-grid{grid-template-columns:1fr;}}
+
+    /* ── FEATURES ── */
+    .features-sec{background:var(--bg);}
+    .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
+    .feat-card{background:#fff;border-radius:var(--r);padding:26px;border:1px solid var(--border);border-top:3px solid var(--blue);transition:.3s;position:relative;overflow:hidden;}
+    .feat-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-h);border-color:var(--blue);}
+    .feat-card.highlight{border-top-color:#f59e0b;background:linear-gradient(135deg,#fffbeb,#fff);}
+    .feat-card.highlight:hover{box-shadow:0 12px 40px rgba(245,158,11,.2);}
+    .feat-badge{position:absolute;top:14px;right:14px;background:#f59e0b;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;}
+    .feat-icon{width:50px;height:50px;background:var(--blue-l);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--blue);margin-bottom:16px;}
+    .feat-card.highlight .feat-icon{background:rgba(245,158,11,.12);color:#f59e0b;}
+    .feat-card h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px;}
+    .feat-card p{font-size:13px;color:var(--muted);line-height:1.65;}
+    @media(max-width:1100px){.features-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.features-grid{grid-template-columns:1fr;}}
+
+    /* ── OMR SPOTLIGHT ── */
+    .omr-sec{background:linear-gradient(135deg,#1A4FA0 0%,#306DD6 50%,#306DD6 100%);padding:90px 5%;}
+    .omr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:60px;flex-wrap:wrap;}
+    .omr-text{flex:1;min-width:280px;}
+    .omr-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:#fff;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:18px;}
+    .omr-text h2{font-size:38px;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2;}
+    .omr-text h2 span{color:#fbbf24;}
+    .omr-text p{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:32px;line-height:1.75;}
+    .omr-steps{display:flex;flex-direction:column;gap:14px;}
+    .omr-step{display:flex;align-items:flex-start;gap:14px;}
+    .omr-step-num{width:36px;height:36px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;}
+    .omr-step-body h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;}
+    .omr-step-body p{font-size:13px;color:rgba(255,255,255,.6);}
+    .omr-visual{flex:1;min-width:260px;display:flex;justify-content:center;}
+    .omr-mock{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;width:100%;max-width:380px;backdrop-filter:blur(8px);}
+    .omr-mock-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.8px;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+    .omr-sheet{background:rgba(255,255,255,.06);border-radius:12px;padding:16px;}
+    .omr-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+    .omr-q{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);width:20px;}
+    .omr-bubble{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,.4);transition:.2s;}
+    .omr-bubble.filled{background:#306DD6;border-color:#306DD6;color:#fff;}
+    .omr-bubble.correct{background:#22c55e;border-color:#22c55e;color:#fff;}
+    .omr-bubble.wrong{background:#ef4444;border-color:#ef4444;color:#fff;}
+    .omr-result{margin-top:16px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px;}
+    .omr-result i{color:#22c55e;font-size:20px;}
+    .omr-result-text h4{font-size:14px;font-weight:700;color:#fff;}
+    .omr-result-text p{font-size:12px;color:rgba(255,255,255,.6);}
+    @media(max-width:900px){.omr-text h2{font-size:28px;}}
+
+    /* ── STATS ── */
+    .stats-strip{background:#f1f5f9;padding:70px 5%;}
+    .stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;}
+    .stat-item h2{font-size:48px;font-weight:900;color:var(--blue);line-height:1;}
+    .stat-item p{font-size:15px;color:var(--muted);margin-top:8px;font-weight:500;}
+    .stat-item .stat-label{font-size:12px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:4px;}
+    @media(max-width:768px){.stats-grid{grid-template-columns:1fr 1fr;gap:24px;}}
+
+    /* ── HOW IT WORKS ── */
+    .how-sec{background:#fff;}
+    .steps-row{display:flex;align-items:flex-start;gap:0;margin-top:56px;position:relative;}
+    .steps-row::before{content:'';position:absolute;top:28px;left:calc(16.66% + 28px);right:calc(16.66% + 28px);height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-m));z-index:0;}
+    .step-item{flex:1;text-align:center;padding:0 16px;position:relative;z-index:1;}
+    .step-circle{width:56px;height:56px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin:0 auto 18px;box-shadow:0 6px 20px rgba(48,109,214,.3);}
+    .step-item h3{font-size:17px;font-weight:700;color:var(--dark);margin-bottom:8px;}
+    .step-item p{font-size:13px;color:var(--muted);line-height:1.65;}
+    @media(max-width:768px){.steps-row{flex-direction:column;gap:32px;}.steps-row::before{display:none;}}
+
+    /* ── TESTIMONIALS ── */
+    .testi-sec{background:var(--bg);}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+    .testi-card{background:#fff;border-radius:var(--r);padding:28px;border:1px solid var(--border);transition:.3s;}
+    .testi-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-h);}
+    .testi-stars{color:#f59e0b;font-size:14px;margin-bottom:14px;letter-spacing:2px;}
+    .testi-text{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;font-style:italic;}
+    .testi-user{display:flex;align-items:center;gap:12px;}
+    .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;}
+    .testi-name{font-size:14px;font-weight:700;color:var(--dark);}
+    .testi-school{font-size:12px;color:var(--muted);}
+    @media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+
+    /* ── CTA BANNER ── */
+    .cta-banner{background:linear-gradient(135deg,#1A4FA0,#306DD6,#306DD6);padding:90px 5%;text-align:center;}
+    .cta-banner h2{font-size:42px;font-weight:900;color:#fff;margin-bottom:14px;}
+    .cta-banner p{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:36px;}
+    .cta-banner .btn-fill{background:#fff;color:var(--blue);font-size:16px;padding:16px 36px;}
+    .cta-banner .btn-fill:hover{background:var(--blue-l);transform:translateY(-3px);}
+    @media(max-width:600px){.cta-banner h2{font-size:28px;}}
+
+    /* ── FOOTER ── */
+    .ms-footer{background:var(--dark);padding:48px 5% 24px;}
+    .footer-row{max-width:1200px;margin:0 auto;display:flex;gap:40px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);}
+    .footer-brand{flex:1.5;min-width:220px;}
+    .footer-logo{display:flex;align-items:center;gap:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:12px;}
+    .footer-logo i{color:var(--blue-m);}
+    .footer-logo span{color:var(--blue-m);}
+    .footer-brand p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
+    .footer-col{flex:1;min-width:120px;}
+    .footer-col h4{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+    .footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:9px;transition:.2s;}
+    .footer-col a:hover{color:#fff;padding-left:4px;}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+    .footer-bottom p{font-size:13px;color:rgba(255,255,255,.3);}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="ms-nav">
+    <div class="ms-nav-inner">
+      <div class="ms-logo"><i class="fa-solid fa-graduation-cap"></i> Ed-<span>Hills</span></div>
+      <nav class="ms-nav-links">
+        <a href="#features">Features</a>
+        <a href="#omr">OMR Scanner</a>
+        <a href="#how">How It Works</a>
+        <a href="about.html">About</a>
+        <a href="index.html">Home</a>
+      </nav>
+      <button class="ms-nav-cta" onclick="location.href='login.html'">Get Started Free</button>
+      <button class="ms-hamburger" onclick="document.getElementById('msMobileNav').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <nav class="ms-mobile-nav" id="msMobileNav">
+      <a href="#features">Features</a>
+      <a href="#omr">OMR Scanner</a>
+      <a href="#how">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="login.html" style="background:var(--blue);color:#fff;font-weight:700;border-radius:8px;">Get Started Free</a>
+    </nav>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge"><i class="fa-solid fa-school"></i> Complete Digital School Management</div>
+        <h1>Manage Your Entire School — From One <span>Smart Dashboard</span></h1>
+        <p class="hero-sub">Edhills gives school administrators complete control over classes, students, attendance, exams, and results — all in one place.</p>
+        <div class="hero-btns">
+          <button class="btn-fill" onclick="location.href='login.html'"><i class="fa-solid fa-rocket"></i> Get Started Free</button>
+          <button class="btn-outline"><i class="fa-solid fa-play"></i> Watch Demo</button>
+        </div>
+        <div class="hero-trust">
+          <i class="fa-solid fa-circle-check"></i> No credit card required &nbsp;·&nbsp;
+          <i class="fa-solid fa-circle-check"></i> Free setup &nbsp;·&nbsp;
+          <i class="fa-solid fa-circle-check"></i> 5-minute onboarding
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ef4444;"></div>
+            <div class="mock-dot" style="background:#f59e0b;"></div>
+            <div class="mock-dot" style="background:#22c55e;"></div>
+            <span class="mock-title">Edhills School Dashboard</span>
+          </div>
+          <div class="mock-stats">
+            <div class="mock-stat"><div class="num">1,240</div><div class="lbl">Students</div></div>
+            <div class="mock-stat"><div class="num">94%</div><div class="lbl">Attendance</div></div>
+            <div class="mock-stat"><div class="num">38</div><div class="lbl">Classes</div></div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-chart-title">Monthly Performance</div>
+            <div class="mock-bars">
+              <div class="mock-bar" style="height:40%;background:#306DD6;opacity:.4;"></div>
+              <div class="mock-bar" style="height:65%;background:#306DD6;opacity:.6;"></div>
+              <div class="mock-bar" style="height:55%;background:#306DD6;opacity:.5;"></div>
+              <div class="mock-bar" style="height:80%;background:#306DD6;opacity:.7;"></div>
+              <div class="mock-bar" style="height:70%;background:#306DD6;opacity:.6;"></div>
+              <div class="mock-bar" style="height:95%;background:#306DD6;"></div>
+              <div class="mock-bar" style="height:85%;background:#306DD6;opacity:.9;"></div>
+            </div>
+          </div>
+          <div class="mock-rows">
+            <div class="mock-row"><div class="mock-row-dot"></div><div class="mock-row-text">Class 10-A — OMR Results Ready</div><div class="mock-row-badge">New</div></div>
+            <div class="mock-row"><div class="mock-row-dot" style="background:#22c55e;"></div><div class="mock-row-text">Attendance marked — All sections</div><div class="mock-row-badge" style="background:#f0fdf4;color:#16a34a;">Done</div></div>
+            <div class="mock-row"><div class="mock-row-dot" style="background:#f59e0b;"></div><div class="mock-row-text">Paper generated — Class 9 Maths</div><div class="mock-row-badge" style="background:#fffbeb;color:#d97706;">Ready</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROBLEM STRIP ═══ -->
+  <section class="problem-strip">
+    <div class="problem-inner">
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div><h4>Attendance registers get lost</h4><p>Paper registers are unreliable, hard to track, and impossible to analyse at scale.</p></div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i class="fa-solid fa-clock"></i></div>
+          <div><h4>OMR sheets take days to evaluate</h4><p>Manual checking of hundreds of answer sheets wastes teacher time and delays results.</p></div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i class="fa-solid fa-chart-bar"></i></div>
+          <div><h4>No unified view of student performance</h4><p>Data is scattered across registers, spreadsheets, and files — no single source of truth.</p></div>
+        </div>
+      </div>
+      <div class="problem-cta">Edhills solves all of this — <span>digitally.</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="sec features-sec" id="features">
+    <div class="wrap">
+      <div class="text-center">
+        <div class="chip"><i class="fa-solid fa-star"></i> Platform Features</div>
+        <h2 class="sec-title">Everything Your School <span>Needs</span></h2>
+        <p class="sec-sub">8 powerful tools built specifically for school administrators, teachers, and principals.</p>
+      </div>
+      <div class="features-grid">
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-table-columns"></i></div>
+          <h3>Admin Dashboard</h3>
+          <p>One central hub to manage every activity across your school — classes, students, exams, and reports.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-school"></i></div>
+          <h3>Class &amp; Section Management</h3>
+          <p>Create classes, organize sections, and manage everything structured under each division seamlessly.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-users"></i></div>
+          <h3>Student Management</h3>
+          <p>Add students individually or import hundreds at once via Excel. All student records in one searchable place.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3>Smart Attendance</h3>
+          <p>Mark daily attendance section-wise or student-wise. Track records, spot trends, and never miss a report.</p>
+        </div>
+
+        <div class="feat-card highlight">
+          <span class="feat-badge">Most Powerful</span>
+          <div class="feat-icon"><i class="fa-solid fa-camera"></i></div>
+          <h3>OMR Answer Sheet Scanner</h3>
+          <p>Scan printed answer sheets using any device camera. Our system automatically reads and evaluates every bubble — no manual work needed.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Deep Performance Analytics</h3>
+          <p>Get subject-wise, section-wise, and student-wise insights from every OMR test. Understand where students struggle.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-file-lines"></i></div>
+          <h3>Paper Generator</h3>
+          <p>Generate formatted, print-ready question papers from your question bank in seconds.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon"><i class="fa-solid fa-file-excel"></i></div>
+          <h3>Excel Import &amp; Export</h3>
+          <p>Bulk import students via Excel. Export all results and attendance data instantly for reports and records.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OMR SPOTLIGHT ═══ -->
+  <section class="omr-sec" id="omr">
+    <div class="omr-inner">
+      <div class="omr-text">
+        <div class="omr-chip"><i class="fa-solid fa-camera"></i> OMR Technology</div>
+        <h2>The Future of Exam Evaluation <span>is Here</span></h2>
+        <p>No more manual checking. No more delays. Scan, evaluate, and publish results in minutes — not days.</p>
+        <div class="omr-steps">
+          <div class="omr-step"><div class="omr-step-num">1</div><div class="omr-step-body"><h4>Set the Answer Key in the app</h4><p>Enter correct answers for each question before the exam.</p></div></div>
+          <div class="omr-step"><div class="omr-step-num">2</div><div class="omr-step-body"><h4>Students fill printed OMR sheets</h4><p>Standard bubble sheets — print and distribute as usual.</p></div></div>
+          <div class="omr-step"><div class="omr-step-num">3</div><div class="omr-step-body"><h4>Scan sheets using your device camera</h4><p>Any smartphone or tablet camera works — no special hardware.</p></div></div>
+          <div class="omr-step"><div class="omr-step-num">4</div><div class="omr-step-body"><h4>System auto-evaluates every answer</h4><p>AI reads each bubble and compares with the answer key instantly.</p></div></div>
+          <div class="omr-step"><div class="omr-step-num">5</div><div class="omr-step-body"><h4>Results &amp; analytics ready instantly</h4><p>Scores, rankings, and subject-wise breakdowns — all generated automatically.</p></div></div>
+          <div class="omr-step"><div class="omr-step-num">6</div><div class="omr-step-body"><h4>Export everything to Excel</h4><p>Download complete result sheets for records, parents, and reports.</p></div></div>
+        </div>
+      </div>
+      <div class="omr-visual">
+        <div class="omr-mock">
+          <div class="omr-mock-title"><i class="fa-solid fa-camera"></i> OMR Sheet — Auto Evaluation</div>
+          <div class="omr-sheet">
+            <div class="omr-row"><span class="omr-q">Q1</span><div class="omr-bubble">A</div><div class="omr-bubble correct">B</div><div class="omr-bubble">C</div><div class="omr-bubble">D</div><span style="font-size:11px;color:#22c55e;margin-left:6px;font-weight:700;">✓</span></div>
+            <div class="omr-row"><span class="omr-q">Q2</span><div class="omr-bubble filled">A</div><div class="omr-bubble">B</div><div class="omr-bubble">C</div><div class="omr-bubble">D</div><span style="font-size:11px;color:#22c55e;margin-left:6px;font-weight:700;">✓</span></div>
+            <div class="omr-row"><span class="omr-q">Q3</span><div class="omr-bubble">A</div><div class="omr-bubble">B</div><div class="omr-bubble wrong">C</div><div class="omr-bubble">D</div><span style="font-size:11px;color:#ef4444;margin-left:6px;font-weight:700;">✗</span></div>
+            <div class="omr-row"><span class="omr-q">Q4</span><div class="omr-bubble">A</div><div class="omr-bubble">B</div><div class="omr-bubble">C</div><div class="omr-bubble correct">D</div><span style="font-size:11px;color:#22c55e;margin-left:6px;font-weight:700;">✓</span></div>
+            <div class="omr-row"><span class="omr-q">Q5</span><div class="omr-bubble filled">A</div><div class="omr-bubble">B</div><div class="omr-bubble">C</div><div class="omr-bubble">D</div><span style="font-size:11px;color:#22c55e;margin-left:6px;font-weight:700;">✓</span></div>
+          </div>
+          <div class="omr-result">
+            <i class="fa-solid fa-circle-check"></i>
+            <div class="omr-result-text"><h4>Score: 40 / 50 — 80%</h4><p>Evaluated in 0.8 seconds · 0 errors</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-item"><h2>10x</h2><p>Faster exam evaluation</p><div class="stat-label">vs manual checking</div></div>
+      <div class="stat-item"><h2>100%</h2><p>Digital attendance records</p><div class="stat-label">always accessible</div></div>
+      <div class="stat-item"><h2>0</h2><p>Errors in OMR evaluation</p><div class="stat-label">AI-powered accuracy</div></div>
+      <div class="stat-item"><h2>1</h2><p>Dashboard for your school</p><div class="stat-label">everything in one place</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="sec how-sec" id="how">
+    <div class="wrap">
+      <div class="text-center">
+        <div class="chip"><i class="fa-solid fa-map"></i> Simple Process</div>
+        <h2 class="sec-title">Up and Running in <span>3 Simple Steps</span></h2>
+        <p class="sec-sub">No technical expertise needed. Any school can be fully set up in under an hour.</p>
+      </div>
+      <div class="steps-row">
+        <div class="step-item">
+          <div class="step-circle"><i class="fa-solid fa-school"></i></div>
+          <h3>Set Up Your School</h3>
+          <p>Add your classes, sections, and import all students via Excel. Your school is ready in minutes.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-circle"><i class="fa-solid fa-file-pen"></i></div>
+          <h3>Run Your Exams</h3>
+          <p>Generate question papers, distribute OMR sheets, and scan them after the exam using any camera.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-circle"><i class="fa-solid fa-chart-pie"></i></div>
+          <h3>Get Insights</h3>
+          <p>View results, analytics, and attendance reports instantly. Export everything to Excel with one click.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="sec testi-sec">
+    <div class="wrap">
+      <div class="text-center">
+        <div class="chip"><i class="fa-solid fa-quote-left"></i> What Schools Say</div>
+        <h2 class="sec-title">Trusted by <span>School Leaders</span></h2>
+        <p class="sec-sub">Hear from principals and administrators who transformed their school management with Edhills.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The OMR scanner is a game changer. What used to take our teachers 3 days now takes 30 minutes. The accuracy is incredible — zero errors in 500+ sheets."</p>
+          <div class="testi-user">
+            <div class="testi-avatar" style="background:#306DD6;">RS</div>
+            <div><div class="testi-name">Rajesh Sharma</div><div class="testi-school">Principal, Delhi Public School</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Managing attendance for 1,200 students used to be a nightmare. With Edhills, every teacher marks attendance digitally and I get a live report on my dashboard."</p>
+          <div class="testi-user">
+            <div class="testi-avatar" style="background:#306DD6;">PM</div>
+            <div><div class="testi-name">Priya Mehta</div><div class="testi-school">Administrator, St. Mary's School</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The analytics dashboard shows exactly which topics students are struggling with. We've improved our Class 10 board results by 18% since using Edhills."</p>
+          <div class="testi-user">
+            <div class="testi-avatar" style="background:#1A4FA0;">AK</div>
+            <div><div class="testi-name">Amit Kumar</div><div class="testi-school">Vice Principal, Sunrise Academy</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BANNER ═══ -->
+  <section class="cta-banner">
+    <h2>Ready to Transform Your<br>School Management?</h2>
+    <p>Join hundreds of schools already using Edhills to save time, reduce errors, and improve results.</p>
+    <button class="btn-fill" onclick="location.href='login.html'"><i class="fa-solid fa-rocket"></i> Start Free Today</button>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="ms-footer">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <div class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Ed-<span>Hills</span></div>
+        <p>Complete Digital School Management — Powered by Edhills. Built for principals, administrators, and teachers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Features</h4>
+        <a href="#features">Admin Dashboard</a>
+        <a href="#features">OMR Scanner</a>
+        <a href="#features">Attendance</a>
+        <a href="#features">Analytics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="index.html">Home</a>
+        <a href="counselling.html">Contact</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a href="get-app.html">Download App</a>
+        <a href="courses.html">Courses</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Edhills. All rights reserved.</p>
+      <p style="color:rgba(255,255,255,.2);">Built with ❤️ for India's schools</p>
+    </div>
+  </footer>
+
+  <script>
+    // Animate mock bars on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.mock-bar').forEach((b, i) => {
+        b.style.height = '0';
+        setTimeout(() => { b.style.transition = 'height .6s ease'; b.style.height = b.getAttribute('style').match(/height:(\S+)/)?.[1] || '50%'; }, i * 80 + 400);
+      });
+    });
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>

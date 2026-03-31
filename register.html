@@ -1,0 +1,668 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Student Details | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="stylesheet" href="edhills-theme.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A4FA0;
+            --secondary: #306DD6;
+            --accent: #306DD6;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .header-actions {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            padding: 5px;
+            transition: 0.3s;
+        }
+
+        .logo-h {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-h span {
+            color: #306DD6;
+        }
+
+        .logo-h i {
+            font-size: 32px;
+            color: #306DD6;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #306DD6;
+        }
+
+        /* MAIN CONTENT */
+        .register-page-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            min-height: calc(100vh - 75px);
+            position: relative;
+        }
+
+        /* Background Shapes */
+        .shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .shape-1 {
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+            margin: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Left Side: Branding */
+        .branding-side {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .branding-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            font-size: 40px;
+            color: var(--accent);
+            background: rgba(250, 204, 21, 0.1);
+            padding: 8px;
+            border-radius: 15px;
+        }
+
+        .branding-side h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .benefit-item i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        /* Right Side: Form */
+        .form-side {
+            flex: 1.2;
+            padding: 60px;
+            background: white;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 0 0 10px;
+        }
+
+        .form-header p {
+            color: #666;
+            margin: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: 0.3s;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--secondary);
+            background: #f8fbff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(23, 70, 162, 0.2);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-link a {
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #64748b;
+            transition: 0.3s;
+            flex: 1;
+        }
+
+        .bottom-nav-item i {
+            font-size: 22px;
+        }
+
+        .bottom-nav-item span {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .bottom-nav-item:hover,
+        .bottom-nav-item.active {
+            color: #1A4FA0;
+        }
+
+        @media (max-width: 850px) {
+            .register-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+
+            .branding-side {
+                padding: 40px;
+                text-align: center;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .form-side {
+                padding: 40px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+        }
+
+        /* Toast Styling */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .toast.success { background: #10b981; }
+        .toast.error { background: #ef4444; }
+        .toast.warning { background: #f59e0b; }
+    </style>
+</head>
+
+<body>
+    <!-- SHARED NAVBAR: injected by navbar.js -->
+
+    <div class="register-page-content">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+
+        <div class="register-container">
+            <!-- Branding Side -->
+            <div class="branding-side">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 40px; text-decoration: none; color: white; display: flex; align-items: center; gap: 10px;">
+                    <i class="ri-graduation-cap-fill"
+                        style="background: rgba(250, 204, 21, 0.1); padding: 8px; border-radius: 12px; color: #306DD6; font-size: 32px;"></i>
+                    <span style="font-size: 28px; font-weight: 700;">ed<span style="color: #306DD6;">Hills</span></span>
+                </a>
+                <h1>Join the Community of High Achievers.</h1>
+                <p style="opacity: 0.8; margin-bottom: 30px;">Create your student profile to access premium courses,
+                    live classes, and free study materials.</p>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color: #306DD6;"></i> Access to JEE,
+                    NEET & CUET Resources</div>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color: #306DD6;"></i> Weekly Mock
+                    Tests & Performance Reports</div>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color: #306DD6;"></i> Direct
+                    Mentorship from Top Educators</div>
+            </div>
+
+            <!-- Form Side -->
+            <div class="form-side">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Enter your student details to get started.</p>
+                </div>
+
+                <form id="registerForm">
+                    <div class="form-grid">
+                        <div class="input-group full-width">
+                            <label>Student Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="ri-user-line"></i>
+                                <input type="text" id="name" placeholder="Enrolment Name" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="ri-mail-line"></i>
+                                <input type="email" id="email" placeholder="email@example.com" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <div class="input-wrapper">
+                                <i class="ri-phone-line"></i>
+                                <input type="tel" id="phone" placeholder="Contact number" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Standard / Class</label>
+                            <div class="input-wrapper">
+                                <i class="ri-book-open-line"></i>
+                                <select id="class" style="padding-left: 45px;">
+                                    <option value="Class 10">Class 10th</option>
+                                    <option value="Class 11">Class 11th</option>
+                                    <option value="Class 12">Class 12th</option>
+                                    <option value="Dropper">Dropper / Repeater</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Create Password</label>
+                            <div class="input-wrapper">
+                                <i class="ri-lock-password-line"></i>
+                                <input type="password" id="password" placeholder="Min. 6 characters" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <button type="submit" class="submit-btn" id="regBtn" style="flex: 2;">
+                            Create My Account <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!-- Social Login Divider -->
+                    <div style="display: flex; align-items: center; margin: 25px 0 20px; color: #999; font-size: 13px;">
+                        <div style="flex: 1; height: 1px; background: #eee;"></div>
+                        <span style="padding: 0 15px;">or continue with</span>
+                        <div style="flex: 1; height: 1px; background: #eee;"></div>
+                    </div>
+
+                    <!-- Google Login Button -->
+                    <button type="button" onclick="signUpWithGoogle()"
+                        style="width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 12px; background: white; color: #333; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" style="width: 20px;"
+                            alt="Google">
+                        Sign up with Google
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    Already have an account? <a href="login.html"
+                        style="color: var(--primary); font-weight: 700; text-decoration: none;">Login Here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="regToast"></div>
+
+
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+        }
+
+        window.showToast = function (msg, type = 'error') {
+            const t = document.getElementById('regToast');
+            if (t) {
+                t.className = 'toast show ' + type;
+                t.innerHTML = (type === 'success' ? '&#9989; ' : '&#9888; ') + msg;
+                setTimeout(() => t.className = 'toast', 4000);
+            }
+        }
+
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('regBtn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Creating Account...';
+                btn.disabled = true;
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const userClass = document.getElementById('class').value;
+                const password = document.getElementById('password').value;
+
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters.', 'error');
+                    btn.innerHTML = originalHTML; btn.disabled = false; return;
+                }
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, phone, class: userClass, password })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        localStorage.setItem('currentUser', JSON.stringify(data.user));
+                        localStorage.setItem('edHillsToken', data.token);
+                        showToast('Account created! Welcome to edHills ??', 'success');
+                        setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+                    } else {
+                        showToast(data.message || 'Registration failed.', 'error');
+                        btn.innerHTML = originalHTML; btn.disabled = false;
+                    }
+                } catch (error) {
+                    console.warn('Backend connection failed, using local storage fallback...');
+
+                    // Local Storage Fallback for Demo
+                    let users = JSON.parse(localStorage.getItem('users') || '[]');
+                    if (users.find(u => u.email === email)) {
+                        showToast('Email already registered locally.', 'error');
+                        btn.innerHTML = originalHTML; btn.disabled = false;
+                        return;
+                    }
+
+                    const newUser = {
+                        name,
+                        email,
+                        phone,
+                        class: userClass,
+                        password,
+                        rollNumber: 'EDH-LOCAL-' + Math.floor(1000 + Math.random() * 9000),
+                        role: 'student'
+                    };
+
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('currentUser', JSON.stringify(newUser));
+                    localStorage.setItem('edHillsToken', 'local-offline-session');
+
+                    showToast('Local Account created! (Offline Mode) ??', 'success');
+                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+                }
+            });
+        }
+    </script>
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        window.signUpWithGoogle = async function () {
+            const provider = new GoogleAuthProvider();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                console.log("Google User:", user);
+
+                // Call Backend for Google Login/Register
+                const response = await fetch('http://localhost:5000/api/auth/google-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: user.displayName,
+                        email: user.email,
+                        photo: user.photoURL,
+                        providerId: user.uid
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('edHillsToken', data.token);
+                    showToast('Welcome ' + data.user.name + '! Account linked successfully.', 'success');
+                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+                } else {
+                    throw new Error(data.message || 'Backend Google link failed');
+                }
+            } catch (error) {
+                console.error("Google Auth Error:", error);
+                if (error.message.includes('Failed to fetch') || error.message.includes('Backend')) {
+                    // Fallback
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        name: auth.currentUser?.displayName || 'Google User',
+                        email: auth.currentUser?.email,
+                        photo: auth.currentUser?.photoURL,
+                        role: 'student'
+                    }));
+                    localStorage.setItem('edHillsToken', 'local-google-session');
+                    showToast('Logged in via Google (Offline Mode)', 'success');
+                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+                } else {
+                    showToast("Google Sign-In failed: " + error.message, 'error');
+                }
+            }
+        };
+    </script>
+<script src="navbar.js"></script>
+</body>
+

@@ -1,0 +1,423 @@
+﻿/* ═══════════════════════════════════════════════════
+   ED-HILLS  —  Shared Navbar CSS
+   Dark navy · Teal accents · Outfit font
+   ═══════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* ─────────────────────────────────────────
+   1. HEADER SHELL
+───────────────────────────────────────── */
+#main-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: #0F172A;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  z-index: 9000;
+  font-family: 'Outfit', sans-serif;
+  box-shadow: 0 2px 24px rgba(15,23,42,.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 64px;
+  gap: 8px;
+}
+
+/* ─────────────────────────────────────────
+   2. LOGO
+───────────────────────────────────────── */
+#main-header .logo,
+a.logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -.3px;
+}
+#main-header .logo i,
+a.logo > i {
+  color: #306DD6 !important;
+  font-size: 26px !important;
+}
+#main-header .logo span,
+a.logo span {
+  color: #306DD6 !important;
+}
+
+/* ─────────────────────────────────────────
+   3. HAMBURGER
+───────────────────────────────────────── */
+.menu-toggle,
+#mobile-menu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff !important;
+  font-size: 26px;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background .2s;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+}
+.menu-toggle:hover,
+#mobile-menu:hover { background: rgba(255,255,255,.1); }
+
+@media (max-width: 1024px) {
+  .menu-toggle,
+  #mobile-menu { display: flex !important; }
+}
+
+/* ─────────────────────────────────────────
+   4. DESKTOP NAV
+───────────────────────────────────────── */
+#nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+@media (max-width: 1024px) {
+  #nav-menu { display: none !important; }
+}
+
+/* ─────────────────────────────────────────
+   5. ALL NAV LINKS
+───────────────────────────────────────── */
+#nav-menu > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 11px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,.82) !important;
+  text-decoration: none !important;
+  transition: color .2s, background .2s;
+  white-space: nowrap;
+  position: relative;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+}
+/* Teal underline on hover */
+#nav-menu > a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #306DD6;
+  border-radius: 2px;
+  transition: width .2s;
+}
+#nav-menu > a:hover::after { width: 65%; }
+#nav-menu > a:hover { color: #306DD6 !important; }
+
+/* Active page */
+#nav-menu > a.eh-active {
+  color: #306DD6 !important;
+}
+#nav-menu > a.eh-active::after { width: 65%; }
+
+/* ─────────────────────────────────────────
+   6. GET APP PILL
+───────────────────────────────────────── */
+#nav-menu > a.eh-getapp {
+  color: #4d8fe0 !important;
+  background: rgba(48,109,214,.15) !important;
+  font-weight: 700 !important;
+}
+#nav-menu > a.eh-getapp:hover { background: rgba(48,109,214,.25) !important; }
+#nav-menu > a.eh-getapp::after { display: none !important; }
+
+/* ─────────────────────────────────────────
+   7. DASHBOARD / NAV-BTN
+───────────────────────────────────────── */
+#nav-menu > a.nav-btn,
+#nav-menu > a#loginBtn {
+  background: #306DD6 !important;
+  color: #fff !important;
+  padding: 9px 18px !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  border: none !important;
+  transition: background .2s, transform .2s !important;
+  flex-shrink: 0;
+}
+#nav-menu > a.nav-btn:hover,
+#nav-menu > a#loginBtn:hover {
+  background: #1746a2 !important;
+  transform: translateY(-2px);
+}
+#nav-menu > a.nav-btn::after,
+#nav-menu > a#loginBtn::after { display: none !important; }
+
+/* ─────────────────────────────────────────
+   8. COURSES DROPDOWN BUTTON
+───────────────────────────────────────── */
+.eh-courses-wrap { position: relative; }
+
+.eh-courses-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,.82);
+  background: transparent;
+  border: 1.5px solid rgba(48,109,214,.5);
+  cursor: pointer;
+  transition: .2s;
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-courses-btn:hover,
+.eh-courses-btn.open {
+  background: rgba(48,109,214,.12);
+  color: #4d8fe0;
+  border-color: #306DD6;
+}
+.eh-chevron {
+  font-size: 18px;
+  transition: transform .2s;
+  display: inline-block;
+}
+.eh-courses-btn.open .eh-chevron { transform: rotate(180deg); }
+
+/* ─────────────────────────────────────────
+   9. MEGA DROPDOWN
+───────────────────────────────────────── */
+.eh-mega-drop {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+  z-index: 99999;
+  min-width: 860px;
+  overflow: hidden;
+}
+.eh-mega-drop.open {
+  display: block;
+  animation: ehDropIn .18s ease;
+}
+@keyframes ehDropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.eh-mega-inner {
+  display: flex;
+  max-height: calc(100vh - 80px);
+}
+
+/* Category list */
+.eh-cat-list {
+  width: 280px;
+  flex-shrink: 0;
+  border-right: 1px solid #f1f5f9;
+  overflow-y: auto;
+  padding: 8px 0;
+  background: #fafafa;
+}
+.eh-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.eh-cat-item:hover,
+.eh-cat-item.eh-cat-active { background: #e8f0fd; }
+.eh-cat-item.eh-cat-active .eh-cat-title { color: #306DD6; }
+.eh-cat-item.eh-cat-active > i { color: #306DD6; }
+.eh-cat-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1B2124;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-cat-sub {
+  font-size: 11px;
+  color: #757575;
+  margin-top: 2px;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-cat-item > i { color: #9ca3af; font-size: 16px; flex-shrink: 0; }
+
+/* Course cards */
+.eh-course-cards {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 80px);
+  background: #fff;
+}
+.eh-cards-panel {
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+.eh-cards-panel.eh-panel-active {
+  display: flex;
+  animation: ehDropIn .18s ease;
+}
+.eh-course-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 230px;
+  padding: 11px 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  text-decoration: none !important;
+  color: #1B2124 !important;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  font-family: 'Outfit', sans-serif;
+}
+.eh-course-card:hover {
+  border-color: #306DD6;
+  box-shadow: 0 4px 14px rgba(48,109,214,.15);
+  transform: translateY(-2px);
+}
+.eh-course-icon {
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   10. MOBILE DRAWER
+───────────────────────────────────────── */
+.eh-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 290px;
+  height: 100vh;
+  background: #0F172A;
+  z-index: 99999;
+  transition: left .3s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+  box-shadow: 6px 0 32px rgba(0,0,0,.5);
+}
+.eh-mobile-drawer.open { left: 0; }
+
+.eh-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 99998;
+  backdrop-filter: blur(2px);
+}
+.eh-drawer-overlay.open { display: block; }
+
+.eh-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.eh-drawer-body { padding: 14px 12px; }
+.eh-drawer-section { margin-bottom: 22px; }
+.eh-drawer-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,.3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  color: rgba(255,255,255,.8) !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 500;
+  transition: .2s;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-drawer-link i {
+  color: #306DD6;
+  font-size: 17px;
+  width: 20px;
+  flex-shrink: 0;
+}
+.eh-drawer-link:hover {
+  background: rgba(255,255,255,.07);
+  color: #4d8fe0 !important;
+}
+.eh-drawer-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #306DD6;
+  color: #fff !important;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none !important;
+  margin-top: 8px;
+  transition: .2s;
+  font-family: 'Outfit', sans-serif;
+}
+.eh-drawer-login:hover { background: #1746a2; }
+
+/* ─────────────────────────────────────────
+   11. RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 1280px) {
+  #main-header { padding: 0 3%; }
+  #nav-menu > a { padding: 7px 8px; font-size: 13px; }
+  .eh-courses-btn { padding: 7px 10px; font-size: 13px; }
+  .eh-mega-drop { min-width: 720px; }
+  .eh-course-card { width: 200px; }
+}
+@media (max-width: 1024px) {
+  #nav-menu { display: none !important; }
+  .menu-toggle, #mobile-menu { display: flex !important; }
+}
+@media (max-width: 480px) {
+  #main-header { padding: 0 16px; }
+  #main-header .logo, a.logo { font-size: 18px !important; }
+  #main-header .logo i, a.logo > i { font-size: 22px !important; }
+}
